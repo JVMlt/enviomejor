@@ -706,7 +706,6 @@ async function getExchangeRate(currency) {
   if (currency === 'VES' || currency === 'CUP') {
     return FX_FALLBACK[currency];
   }
-
   const apis = [
     async () => {
       const res = await fetch(`https://open.er-api.com/v6/latest/EUR`);
@@ -728,7 +727,6 @@ async function getExchangeRate(currency) {
       return data.rates[currency];
     }
   ];
-
   for (const api of apis) {
     try {
       const rate = await api();
@@ -738,7 +736,6 @@ async function getExchangeRate(currency) {
       }
     } catch {}
   }
-
   document.getElementById('errorMsg').style.display = 'block';
   return FX_FALLBACK[currency];
 }
